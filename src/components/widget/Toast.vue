@@ -7,7 +7,6 @@
 </template>
 <style scoped lang="scss" rel="stylesheet/scss">
     /*@import "~vue-animate/dist/vue-animate.min.css";*/
-    @import "../../sass/transition";
     .container{
         position: absolute;
         left: 50%;
@@ -34,6 +33,7 @@
 
 </style>
 <script>
+    import transition from "../../sass/transition.scss";
     import lifeCycle from '../../mixin/lifeCycle'
     export default{
         ready(){

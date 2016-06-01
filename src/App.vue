@@ -3,6 +3,9 @@
         <toast v-for="toast in toastMessage" :position="toast.pos"  :index="$index"  transition="bounce">
             {{toast.msg}}
         </toast>
+        <dialog :onConfirm="addFriend" :onCancel="closeAddFriendDialog">
+            <avatar name="ruby"></avatar>
+        </dialog>
         <button @click="toastCenter">toast center</button>
         <button @click="toastTop">toast top</button>
         <button @click="toastBottom">toast bottom</button>
@@ -12,8 +15,10 @@
 <script>
     import store from './vuex/store'
     import Toast from 'widget/Toast'
+    import Dialog from 'widget/Dialog'
+    import Avatar from 'widget/Avatar'
     import {toastMessage, showToast} from './vuex/getters'
-    import {toast} from './vuex/actions'
+    import {toast,addFriend,closeAddFriendDialog} from './vuex/actions'
     export default {
         data(){
             return {
@@ -41,14 +46,14 @@
         },
         store,
         components: {
-            Toast
+            Toast,Dialog,Avatar
         },
         vuex: {
             getters: {
                 toastMessage
             },
             actions: {
-                toast
+                toast,addFriend,closeAddFriendDialog
             }
         }
     }
