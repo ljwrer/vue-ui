@@ -1,16 +1,22 @@
-<template  v-for="msg in messageList" >
-    <div :class="messageClass" transition="bounce">{{msg}}</div>
+<template>
+    <div class="container">
+        <div :class="messageClass" :style="styleObject"  v-for="msg in messageList" transition="bounce">{{msg+$index}}</div>
+    </div>
 </template>
 <style scoped lang="scss" rel="stylesheet/scss">
     /*@import "~vue-animate/dist/vue-animate.min.css";*/
+    .container{
+    }
     .message {
         position: absolute;
         left: 50%;
-        top: 50%;
-        /*transform: translate(-50%, -50%);*/
-        padding: 1rem;
-        line-height: 1rem;
+        top:40%;
+        margin: 0 auto;
+        padding: 0.2rem;
+        line-height: 0.1rem;
         border: 1px solid green;
+        border-radius: 5px;
+        background: #ffffff;
     }
 
     .bounce-transition {
@@ -24,15 +30,12 @@
     }
     @keyframes bounce-in {
         0% {
-            opacity: 0;
             transform: scale(0);
         }
         50% {
-            opacity: 0.5;
             transform: scale(1.5);
         }
         100% {
-            opacity: 1;
             transform: scale(1);
         }
     }
@@ -40,10 +43,6 @@
         0% {
             opacity: 1;
             transform: scale(1);
-        }
-        50% {
-            opacity: 0.5;
-            transform: scale(1.5);
         }
         100% {
             opacity: 0;
@@ -53,10 +52,26 @@
 
 </style>
 <script>
+    import lifeCycle from '../../mixin/lifeCycle'
+//    this.$vm.$nextTick(function () {
+//        console.log(111)
+//        Array.prototype.forEach.call(this.$el.querySelectorAll("message"),function (msg) {
+//            msg.style.marginLeft=-~~window.getComputedStyle(msg).width*0.5+"px"
+//        })
+//    });
     export default{
+        mixins:[lifeCycle],
+        ready(){
+            console.log(this.$el);
+        },
         computed: {
             messageClass(){
                 return ["message", this.position, this.extraClass]
+            },
+            styleObject(){
+                return {
+                    'z-index':this.$index
+                }
             }
         },
         props: {

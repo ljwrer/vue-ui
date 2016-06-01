@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <toast :message-list="toastMessage" :show="showToast"></toast>
-        <button @click="toast('hello')">toast</button>
+        <button @click="onClick">toast</button>
     </div>
 </template>
 
@@ -11,6 +11,17 @@
     import {toastMessage, showToast} from './vuex/getters'
     import {toast} from './vuex/actions'
     export default {
+        data(){
+            return {
+                a:1
+            }
+        },
+        methods:{
+            onClick(){
+                this.toast(this.a*100000000000000000+"");
+                this.a++;
+            }
+        },
         store,
         components: {
             Toast
@@ -41,10 +52,11 @@
     }
 
     #app {
-        position: absolute;
+        position: relative;
         height: 100%;
         width: 100%;
         font-family: $font-family-default;
+        background: yellowgreen;
     }
 
     button {

@@ -7,9 +7,9 @@ import {
     REMOVE_TOAST
 } from '../mutation-types'
 const state = {
-    show: false,
+    show: true,
     messageList: [],
-    timeout: 3000
+    timeout: 2000
 };
 const mutations = {
     [TOGGLE_TOAST](state){
@@ -19,7 +19,7 @@ const mutations = {
         state.messageList.push(msg);
     },
     [REMOVE_TOAST](state){
-        state.messageList.pop();
+        // state.messageList.shift();
     }
 };
 export default {
