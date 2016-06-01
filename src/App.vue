@@ -1,11 +1,11 @@
 <template>
     <div id="app">
-        <template v-for="toast in toastMessage">
-            <toast :positon="toast.pos"  :index="$index">
-                {{toast.msg}}
-            </toast>
-        </template>
-        <button @click="onClick">toast</button>
+        <toast v-for="toast in toastMessage" :position="toast.pos"  :index="$index"  transition="bounce">
+            {{toast.msg}}
+        </toast>
+        <button @click="toastCenter">toast center</button>
+        <button @click="toastTop">toast top</button>
+        <button @click="toastBottom">toast bottom</button>
     </div>
 </template>
 
@@ -21,9 +21,22 @@
             }
         },
         methods:{
-            onClick(){
-                this.toast("toast"+this.a);
-                this.a++;
+            toastCenter(){
+                this.toast({
+                    msg:"toast center"
+                });
+            },
+            toastTop(){
+                this.toast({
+                    msg:"toast top",
+                    pos:"top"
+                });
+            },
+            toastBottom(){
+                this.toast({
+                    msg:"toast bottom",
+                    pos:"bottom"
+                });
             }
         },
         store,
@@ -32,7 +45,7 @@
         },
         vuex: {
             getters: {
-                toastMessage, showToast
+                toastMessage
             },
             actions: {
                 toast
@@ -64,19 +77,8 @@
     }
 
     button {
-        width: 5rem;
-        height: 2rem;
-        background: deepskyblue;
-        font-size: 1rem;
-    }
-
-    .toast {
-        border: 1px solid yellowgreen;
+        padding: 0.1rem;
         border-radius: 5px;
-        line-height: 1rem;
-        background: deeppink;
-        text-align: center;
-        transition: all .2s;
+        background: deepskyblue;
     }
-
 </style>

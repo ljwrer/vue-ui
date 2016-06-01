@@ -7,7 +7,6 @@ import {
     REMOVE_TOAST
 } from '../mutation-types'
 const state = {
-    show: true,
     messageList: [],
     timeout: 2000
 };
