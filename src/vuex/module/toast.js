@@ -15,11 +15,11 @@ const mutations = {
     [TOGGLE_TOAST](state){
         state.show = !state.show;
     },
-    [ADD_TOAST](state, msg){
-        state.messageList.push(msg);
+    [ADD_TOAST](state, toast){
+        state.messageList.push(toast);
     },
     [REMOVE_TOAST](state){
-        // state.messageList.shift();
+        state.messageList.shift();
     }
 };
 export default {

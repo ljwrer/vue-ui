@@ -1,6 +1,10 @@
 <template>
     <div id="app">
-        <toast :message-list="toastMessage" :show="showToast"></toast>
+        <template v-for="toast in toastMessage">
+            <toast :positon="toast.pos"  :index="$index">
+                {{toast.msg}}
+            </toast>
+        </template>
         <button @click="onClick">toast</button>
     </div>
 </template>
@@ -18,7 +22,7 @@
         },
         methods:{
             onClick(){
-                this.toast(this.a*100000000000000000+"");
+                this.toast("toast"+this.a);
                 this.a++;
             }
         },

@@ -1,16 +1,14 @@
 <template>
-    <div class="container">
-        <div :class="messageClass" :style="styleObject"  v-for="msg in messageList" transition="bounce">{{msg+$index}}</div>
+    <div :class="messageClass" :style="styleObject"  transition="bounce">
+        <slot></slot>
     </div>
 </template>
 <style scoped lang="scss" rel="stylesheet/scss">
     /*@import "~vue-animate/dist/vue-animate.min.css";*/
-    .container{
-    }
     .message {
         position: absolute;
         left: 50%;
-        top:40%;
+        top:50%;
         margin: 0 auto;
         padding: 0.2rem;
         line-height: 0.1rem;
@@ -53,16 +51,11 @@
 </style>
 <script>
     import lifeCycle from '../../mixin/lifeCycle'
-//    this.$vm.$nextTick(function () {
-//        console.log(111)
-//        Array.prototype.forEach.call(this.$el.querySelectorAll("message"),function (msg) {
-//            msg.style.marginLeft=-~~window.getComputedStyle(msg).width*0.5+"px"
-//        })
-//    });
     export default{
         mixins:[lifeCycle],
         ready(){
-            console.log(this.$el);
+            this.$el.style.marginLeft=parseFloat(window.getComputedStyle(this.$el).width)*(-0.5)+"px"
+            this.$el.style.marginTop=parseFloat(window.getComputedStyle(this.$el).height)*(-0.5)+"px"
         },
         computed: {
             messageClass(){
@@ -70,25 +63,20 @@
             },
             styleObject(){
                 return {
-                    'z-index':this.$index
+                    'z-index':this.index
                 }
             }
         },
         props: {
-            show: {
-                type: Boolean,
-                default: false
-            },
-            messageList: {
-                type: Array,
-                required: true
-            },
             position: {
                 type: String,
                 default: "center"
             },
             extraClass: {
                 type: String
+            },
+            index:{
+                type:Number
             }
         }
     }
