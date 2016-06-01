@@ -1,6 +1,6 @@
 # vue-ui
 
-> use vue ui components form awesome-vue
+> use vue ui components from awesome-vue
 
 ## Build Setup
 
