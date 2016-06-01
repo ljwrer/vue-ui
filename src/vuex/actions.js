@@ -6,14 +6,15 @@ import * as types from './mutation-types'
 
 //toast
 export const toast = function ({dispatch, state:{toast:{timeout}}}, {msg,time,pos}) {
-    dispatch(types.ADD_TOAST,{msg,pos});
+    const toast={msg,pos}
+    dispatch(types.ADD_TOAST,toast);
     setTimeout(function () {
-        dispatch(types.REMOVE_TOAST);
+        dispatch(types.REMOVE_TOAST,toast);
     }, time ? time : timeout);
 };
 
 //add friend
-export const showAddFriendDialog = function ({dispatch}, friend:{name,src,id}) {
+export const showAddFriendDialog = function ({dispatch}, friend) {
     dispatch(types.ADD_FRIEND,friend);
     dispatch(types.SHOW_FRIEND_DIALOG);
 };

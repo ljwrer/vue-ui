@@ -4,6 +4,7 @@
             {{toast.msg}}
         </toast>
         <dialog :onConfirm="addFriend" :onCancel="closeAddFriendDialog">
+            <header>加为好友？</header>
             <avatar name="ruby"></avatar>
         </dialog>
         <button @click="toastCenter">toast center</button>
@@ -34,6 +35,7 @@
             toastTop(){
                 this.toast({
                     msg:"toast top",
+                    time:10000,
                     pos:"top"
                 });
             },

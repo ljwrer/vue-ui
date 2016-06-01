@@ -17,8 +17,8 @@ const mutations = {
     [ADD_TOAST](state, toast){
         state.messageList.push(toast);
     },
-    [REMOVE_TOAST](state){
-        state.messageList.shift();
+    [REMOVE_TOAST](state,toast){
+        state.messageList.$remove(toast);
     }
 };
 export default {
