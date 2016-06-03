@@ -3,34 +3,35 @@
  */
 import {
     ADD_FRIEND,
-    CLEAR_FRIEND,
-    TOGGLE_FRIEND_DIALOG,
-    SHOW_FRIEND_DIALOG,
-    HIDE_FRIEND_DIALOG
+    FRIEND_DIALOG,
+    NEW_FRIEND,
+    RESTORE_FRIEND
 } from '../mutation-types'
 const state = {
-    person:{
+    friends:[],
+    newFriend:{
         name:"",
-        image:"",
-        id:""
+        id:"",
+        avatar:""
     },
     show:false
 };
 const mutations = {
-    [ADD_FRIEND](state){
-        state.show = !state.show;
+    [ADD_FRIEND](state,friend){
+        state.friends.push(friend);
     },
-    [CLEAR_FRIEND](state, toast){
-        state.messageList.push(toast);
+    [NEW_FRIEND](state,friend){
+        state.newFriend=friend;
     },
-    [TOGGLE_FRIEND_DIALOG](state){
-        state.show=!state.show;
+    [RESTORE_FRIEND](state){
+        state.newFriend={
+            name:"",
+            id:"",
+            avatar:""
+        }
     },
-    [SHOW_FRIEND_DIALOG](state){
-        state.show=true;
-    },
-    [HIDE_FRIEND_DIALOG](state){
-        state.show=false;
+    [FRIEND_DIALOG](state,show){
+        state.show=show;
     }
 };
 export default {

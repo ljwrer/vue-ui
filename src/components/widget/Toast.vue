@@ -33,7 +33,6 @@
 
 </style>
 <script>
-    import transition from "../../sass/transition.scss";
     import lifeCycle from '../../mixin/lifeCycle'
     export default{
         ready(){

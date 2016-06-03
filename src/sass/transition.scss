@@ -1,11 +1,13 @@
+$in:5s;
+$out:5s;
 .bounce-transition {
-    display: inline-block;
+    //display: inline-block;
 }
 .bounce-enter {
-    animation: bounce-in .5s;
+    animation: bounce-in $in;
 }
 .bounce-leave {
-    animation: bounce-out .5s;
+    animation: bounce-out $out;
 }
 @keyframes bounce-in {
     0% {
@@ -26,5 +28,21 @@
     100% {
         opacity: 0;
         transform: scale(0);
+    }
+}
+.bounce-center-transition{
+    .center{
+        //@extend .bounce-transition
+        color: red;
+    }
+}
+.bounce-center-enter{
+    .center{
+        @extend .bounce-enter
+    }
+}
+.bounce-center-leave{
+    .center{
+        @extend .bounce-leave
     }
 }

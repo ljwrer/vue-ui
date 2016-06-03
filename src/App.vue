@@ -3,27 +3,36 @@
         <toast v-for="toast in toastMessage" :position="toast.pos"  :index="$index"  transition="bounce">
             {{toast.msg}}
         </toast>
-        <dialog :onConfirm="addFriend" :onCancel="closeAddFriendDialog">
-            <header>加为好友？</header>
-            <avatar name="ruby"></avatar>
-        </dialog>
+        <modal v-show="AddFriendDialogStatus"  transition="fade">
+            <dialog slot="center" :on-confirm="addFriend" :on-cancel="closeAddFriendDialog">
+                <header>加为好友？</header>
+                <avatar :name="newFriend.name" :src="newFriend.avatar"></avatar>
+            </dialog>
+        </modal>
         <button @click="toastCenter">toast center</button>
         <button @click="toastTop">toast top</button>
         <button @click="toastBottom">toast bottom</button>
+        <button @click="showAddFriendDialog(friend)">add friend</button>
     </div>
 </template>
 
 <script>
     import store from './vuex/store'
+    import Modal from 'widget/Modal'
     import Toast from 'widget/Toast'
     import Dialog from 'widget/Dialog'
     import Avatar from 'widget/Avatar'
-    import {toastMessage, showToast} from './vuex/getters'
-    import {toast,addFriend,closeAddFriendDialog} from './vuex/actions'
+    import {toastMessage,AddFriendDialogStatus,newFriend} from './vuex/getters'
+    import {toast,addFriend,closeAddFriendDialog,showAddFriendDialog} from './vuex/actions'
     export default {
         data(){
             return {
-                a:1
+                a:1,
+                friend:{
+                    name:"Blaze",
+                    src:'',
+                    id:233
+                }
             }
         },
         methods:{
@@ -48,14 +57,14 @@
         },
         store,
         components: {
-            Toast,Dialog,Avatar
+            Toast,Dialog,Avatar,Modal
         },
         vuex: {
             getters: {
-                toastMessage
+                toastMessage,AddFriendDialogStatus,newFriend
             },
             actions: {
-                toast,addFriend,closeAddFriendDialog
+                toast,addFriend,closeAddFriendDialog,showAddFriendDialog
             }
         }
     }
@@ -64,7 +73,7 @@
 <style lang="scss" rel="stylesheet/scss">
     @import "sass/reset";
     @import "sass/variable";
-
+    @import "sass/transition";
     html {
         width: 100%;
         height: 100%;

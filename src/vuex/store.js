@@ -4,9 +4,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import toast from './module/toast'
+import friend from './module/friend'
 Vue.use(Vuex);
 const modules={
-  toast
+  toast,friend
 };
 const store=new Vuex.Store({
   modules

@@ -5,8 +5,7 @@ export const REMOVE_TOAST = 'REMOVE_TOAST';
 
 //add friend
 export const ADD_FRIEND = 'ADD_FRIEND';
-export const CLEAR_FRIEND = 'CLEAR_FRIEND';
-export const TOGGLE_FRIEND_DIALOG = 'TOGGLE_FRIEND_DIALOG';
-export const SHOW_FRIEND_DIALOG = 'SHOW_FRIEND_DIALOG';
-export const HIDE_FRIEND_DIALOG = 'HIDE_FRIEND_DIALOG';
+export const NEW_FRIEND = 'NEW_FRIEND';
+export const RESTORE_FRIEND = 'RESTORE_FRIEND';
+export const FRIEND_DIALOG = 'FRIEND_DIALOG';
 
