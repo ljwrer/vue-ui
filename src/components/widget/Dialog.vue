@@ -6,7 +6,7 @@
         <div class="btn">
             <clip-loader :loading="loading"></clip-loader>
             <div v-show="!loading" class="left" @click="onConfirm">确认</div>
-            <div class="right" @click="onCancel">取消</div>
+            <div v-show="!loading" class="right" @click="onCancel">取消</div>
         </div>
     </div>
 </template>

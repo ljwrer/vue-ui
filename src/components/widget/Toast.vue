@@ -23,10 +23,10 @@
     }
     .message {
         transform: translate(-50%,-50%);
-        padding: 0.2rem;
-        line-height: 0.1rem;
+        padding: 0.5rem;
+        line-height: 0.2rem;
         border: 1px solid green;
-        border-radius: 5px;
+        border-radius: 1rem;
         background: #fff;
     }
 

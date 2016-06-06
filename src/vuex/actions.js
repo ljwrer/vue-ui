@@ -36,17 +36,19 @@ export const showAddFriendDialog = function ({dispatch}, friend) {
 };
 export const closeAddFriendDialog=function ({dispatch}) {
     dispatch(types.FRIEND_DIALOG,false);
-    // dispatch(types.TOGGLE_MODAL);
     dispatch(types.RESTORE_FRIEND);
+    setTimeout(function () {
+        dispatch(types.TOGGLE_MODAL);
+    },200)
 };
 export  const addFriend=function ({dispatch, state:{toast:{timeout},friend:{newFriend}}}) {
     api(newFriend).then(function (res) {
         dispatch(types.TOGGLE_LOADING);
-        toast({dispatch, state:{toast:{timeout}}},{msg:res.msg});
+        toast({dispatch, state:{toast:{timeout}}},{msg:res.msg,pos:"bottom"});
         dispatch(types.ADD_FRIEND,newFriend);
     },function (res) {
         dispatch(types.TOGGLE_LOADING);
-        toast({dispatch, state:{toast:{timeout}}},{msg:res.msg})
+        toast({dispatch, state:{toast:{timeout}}},{msg:res.msg,pos:"bottom"})
     }).then(function () {
         closeAddFriendDialog({dispatch})
     });

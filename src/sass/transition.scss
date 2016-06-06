@@ -1,8 +1,5 @@
 $in:.5s;
 $out:.2s;
-.bounce-transition {
-    //display: inline-block;
-}
 .bounce-enter {
     animation: bounce-in $in;
 }
@@ -28,21 +25,5 @@ $out:.2s;
     100% {
         opacity: 0;
         transform: scale(0);
-    }
-}
-.bounce-center-transition{
-    .center{
-        //@extend .bounce-transition
-        color: red;
-    }
-}
-.bounce-center-enter{
-    .center{
-        animation: bounce-in $in;
-    }
-}
-.bounce-center-leave{
-    .center{
-        animation: bounce-out $out;
     }
 }

@@ -3,15 +3,15 @@
         <toast v-for="toast in toastMessage" :position="toast.pos"  :index="$index"  transition="bounce">
             {{toast.msg}}
         </toast>
-        <modal v-show="AddFriendDialogStatus">
+        <modal v-show="modalStatus">
             <dialog v-show="AddFriendDialogStatus" slot="center" transition="bounce" :on-clickaway="away" :on-confirm="addFriend" :on-cancel="closeAddFriendDialog" :loading="AddFriendDialogLoading">
                 <header>加为好友？</header>
                 <avatar :name="newFriend.name" :src="newFriend.avatar"></avatar>
             </dialog>
         </modal>
-        <button @click="toastCenter">toast center</button>
-        <button @click="toastTop">toast top</button>
-        <button @click="toastBottom">toast bottom</button>
+        <button @click.stop="toastCenter">toast center</button>
+        <button @click.stop="toastTop">toast top</button>
+        <button @click.stop="toastBottom">toast bottom</button>
         <button @click.stop="showAddFriendDialog(friend)">add friend</button>
     </div>
 </template>
@@ -25,13 +25,6 @@
     import {toastMessage,AddFriendDialogStatus,newFriend,AddFriendDialogLoading,modalStatus} from './vuex/getters'
     import {toast,addFriend,closeAddFriendDialog,showAddFriendDialog,modal} from './vuex/actions'
     export default {
-        transitions:{
-          'bounce':{
-              afterLeave: function (el) {
-                  this.modal()
-              }
-          }
-        },
         data(){
             return {
                 a:1,
@@ -99,12 +92,15 @@
         height: 100%;
         width: 100%;
         font-family: $font-family-default;
+        font-size: 0.5rem;
         background: yellowgreen;
     }
 
     button {
-        padding: 0.1rem;
-        border-radius: 5px;
+        font-size: 0.5rem;
+        padding: 0.3rem;
+        border: 1px solid deeppink;
+        border-radius: 0.3rem;
         background: deepskyblue;
     }
 </style>
