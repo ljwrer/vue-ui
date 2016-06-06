@@ -1,5 +1,5 @@
-$in:5s;
-$out:5s;
+$in:.5s;
+$out:.2s;
 .bounce-transition {
     //display: inline-block;
 }
@@ -14,7 +14,7 @@ $out:5s;
         transform: scale(0);
     }
     50% {
-        transform: scale(1.5);
+        transform: scale(1.2);
     }
     100% {
         transform: scale(1);
@@ -38,11 +38,11 @@ $out:5s;
 }
 .bounce-center-enter{
     .center{
-        @extend .bounce-enter
+        animation: bounce-in $in;
     }
 }
 .bounce-center-leave{
     .center{
-        @extend .bounce-leave
+        animation: bounce-out $out;
     }
 }

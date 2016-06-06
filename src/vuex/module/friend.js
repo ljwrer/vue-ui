@@ -5,7 +5,8 @@ import {
     ADD_FRIEND,
     FRIEND_DIALOG,
     NEW_FRIEND,
-    RESTORE_FRIEND
+    RESTORE_FRIEND,
+    TOGGLE_LOADING
 } from '../mutation-types'
 const state = {
     friends:[],
@@ -14,7 +15,8 @@ const state = {
         id:"",
         avatar:""
     },
-    show:false
+    show:false,
+    loading:false
 };
 const mutations = {
     [ADD_FRIEND](state,friend){
@@ -32,7 +34,11 @@ const mutations = {
     },
     [FRIEND_DIALOG](state,show){
         state.show=show;
+    },
+    [TOGGLE_LOADING](state){
+        state.loading=!state.loading;
     }
+    
 };
 export default {
     state, mutations

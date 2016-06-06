@@ -31,21 +31,30 @@ export const toast = function ({dispatch, state:{toast:{timeout}}}, {msg,time,po
 //add friend
 export const showAddFriendDialog = function ({dispatch}, friend) {
     dispatch(types.NEW_FRIEND,friend);
+    dispatch(types.TOGGLE_MODAL);
     dispatch(types.FRIEND_DIALOG,true);
 };
 export const closeAddFriendDialog=function ({dispatch}) {
     dispatch(types.FRIEND_DIALOG,false);
+    // dispatch(types.TOGGLE_MODAL);
     dispatch(types.RESTORE_FRIEND);
 };
 export  const addFriend=function ({dispatch, state:{toast:{timeout},friend:{newFriend}}}) {
     api(newFriend).then(function (res) {
+        dispatch(types.TOGGLE_LOADING);
         toast({dispatch, state:{toast:{timeout}}},{msg:res.msg});
         dispatch(types.ADD_FRIEND,newFriend);
     },function (res) {
+        dispatch(types.TOGGLE_LOADING);
         toast({dispatch, state:{toast:{timeout}}},{msg:res.msg})
     }).then(function () {
         closeAddFriendDialog({dispatch})
-    })
+    });
+    dispatch(types.TOGGLE_LOADING);
 };
 
+//modal
+export const modal=function ({dispatch}) {
+    dispatch(types.TOGGLE_MODAL)
+};
 

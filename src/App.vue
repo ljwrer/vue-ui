@@ -3,8 +3,8 @@
         <toast v-for="toast in toastMessage" :position="toast.pos"  :index="$index"  transition="bounce">
             {{toast.msg}}
         </toast>
-        <modal v-show="AddFriendDialogStatus"  transition="fade">
-            <dialog slot="center" :on-confirm="addFriend" :on-cancel="closeAddFriendDialog">
+        <modal v-show="AddFriendDialogStatus">
+            <dialog v-show="AddFriendDialogStatus" slot="center" transition="bounce" :on-clickaway="away" :on-confirm="addFriend" :on-cancel="closeAddFriendDialog" :loading="AddFriendDialogLoading">
                 <header>加为好友？</header>
                 <avatar :name="newFriend.name" :src="newFriend.avatar"></avatar>
             </dialog>
@@ -12,7 +12,7 @@
         <button @click="toastCenter">toast center</button>
         <button @click="toastTop">toast top</button>
         <button @click="toastBottom">toast bottom</button>
-        <button @click="showAddFriendDialog(friend)">add friend</button>
+        <button @click.stop="showAddFriendDialog(friend)">add friend</button>
     </div>
 </template>
 
@@ -22,9 +22,16 @@
     import Toast from 'widget/Toast'
     import Dialog from 'widget/Dialog'
     import Avatar from 'widget/Avatar'
-    import {toastMessage,AddFriendDialogStatus,newFriend} from './vuex/getters'
-    import {toast,addFriend,closeAddFriendDialog,showAddFriendDialog} from './vuex/actions'
+    import {toastMessage,AddFriendDialogStatus,newFriend,AddFriendDialogLoading,modalStatus} from './vuex/getters'
+    import {toast,addFriend,closeAddFriendDialog,showAddFriendDialog,modal} from './vuex/actions'
     export default {
+        transitions:{
+          'bounce':{
+              afterLeave: function (el) {
+                  this.modal()
+              }
+          }
+        },
         data(){
             return {
                 a:1,
@@ -53,6 +60,9 @@
                     msg:"toast bottom",
                     pos:"bottom"
                 });
+            },
+            away(){
+                this.AddFriendDialogStatus&&this.closeAddFriendDialog();
             }
         },
         store,
@@ -61,10 +71,10 @@
         },
         vuex: {
             getters: {
-                toastMessage,AddFriendDialogStatus,newFriend
+                toastMessage,AddFriendDialogStatus,newFriend,AddFriendDialogLoading,modalStatus
             },
             actions: {
-                toast,addFriend,closeAddFriendDialog,showAddFriendDialog
+                toast,addFriend,closeAddFriendDialog,showAddFriendDialog,modal
             }
         }
     }

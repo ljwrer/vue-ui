@@ -1,10 +1,11 @@
 <template>
-    <div class="dialog">
-        <div class="content">
+    <div class="dialog" v-on-clickaway="onClickaway"  >
+        <div class="content" >
             <slot></slot>
         </div>
         <div class="btn">
-            <div class="left" @click="onConfirm">确认</div>
+            <clip-loader :loading="loading"></clip-loader>
+            <div v-show="!loading" class="left" @click="onConfirm">确认</div>
             <div class="right" @click="onCancel">取消</div>
         </div>
     </div>
@@ -31,18 +32,28 @@
 
 </style>
 <script>
+    import { mixin as clickaway } from 'vue-clickaway';
+    import ClipLoader from 'vue-spinner/src/ClipLoader.vue'
     import lifeCycle from '../../mixin/lifeCycle'
     export default{
-        mixins:[lifeCycle],
+        mixins:[lifeCycle,clickaway],
         props:{
+            loading:{
+                type:Boolean,
+                default:false
+            },
             onConfirm:{
                 type:Function
             },
             onCancel:{
                 type:Function
+            },
+            onClickaway:{
+                type:Function
             }
         },
         components:{
+            ClipLoader
         }
     }
 </script>
