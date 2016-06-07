@@ -60,3 +60,11 @@ export const modal=function ({dispatch}) {
     dispatch(types.TOGGLE_MODAL)
 };
 
+//list
+export const getListData=function ({dispatch,state:{list:{data}}},cb) {
+    api("item"+data.length).then(function (res) {
+        dispatch(types.ADD_LIST,res.data);
+    },function (res) {
+        dispatch(types.ADD_LIST,res.data);
+    }).then(cb)
+};

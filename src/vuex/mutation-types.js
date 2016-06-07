@@ -12,3 +12,6 @@ export const TOGGLE_LOADING = 'TOGGLE_LOADING';
 
 //modal
 export const TOGGLE_MODAL='TOGGLE_MODAL';
+
+//list
+export const ADD_LIST='ADD_LIST';
