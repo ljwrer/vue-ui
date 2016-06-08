@@ -14,9 +14,22 @@
         <button @click.stop="toastTop">toast top</button>
         <button @click.stop="toastBottom">toast bottom</button>
         <button @click.stop="showAddFriendDialog(friend)">add friend</button>
-        <ul class="list" v-infinite-scroll="getListData" :infinite-scroll-distance="10">
-            <li v-for="item in listData">{{item}}</li>
-        </ul>
+        <!--<ul class="list" v-infinite-scroll="getListData" :infinite-scroll-distance="10">-->
+            <!--<li v-for="item in listData">{{item}}</li>-->
+        <!--</ul>-->
+        <!--<div class="wrapper">-->
+            <!--<ul v-infinite-scroll="getListData" :infinite-scroll-disabled="loading" :infinite-scroll-distance="50">-->
+                <!--<li v-for="item in listData" class="page-infinite-listitem item">{{ item }}</li>-->
+            <!--</ul>-->
+        <!--</div>-->
+        <div class="wrapper">
+            <ul class="water" v-infinite-scroll="loadMore()" infinite-scroll-disabled="busy" infinite-scroll-distance="10">
+                <li class="item" :style="getStyle()" v-for="item in data">{{item.name}}</li>
+            </ul>
+            <p v-show="busy" class="page-infinite-loading">
+                加载中...
+            </p>
+        </div>
     </div>
 </template>
 
@@ -36,7 +49,11 @@
     } from './vuex/getters'
     import {toast, addFriend, closeAddFriendDialog, showAddFriendDialog, modal, getListData} from './vuex/actions'
     export default {
-
+        ready(){
+          setTimeout(()=>[
+              this.popupVisible=true
+          ],2000)
+        },
         data(){
             return {
                 a: 1,
@@ -44,32 +61,28 @@
                     name: "Blaze",
                     src: '',
                     id: 233
-                }
+                },
+                loading:false,
+                popupVisible:false,
+                busy:false,
+                count:0,
+                data:[]
             }
         },
         methods: {
-            methods: {
-                toastCenter(){
-                    this.toast({
-                        msg: "toast center"
-                    });
-                },
-                toastTop(){
-                    this.toast({
-                        msg: "toast top",
-                        time: 10000,
-                        pos: "top"
-                    });
-                },
-                toastBottom(){
-                    this.toast({
-                        msg: "toast bottom",
-                        pos: "bottom"
-                    });
-                },
-                away(){
-                    this.AddFriendDialogStatus && this.closeAddFriendDialog();
+            getStyle(){
+                return {
+                    height:Math.random()*100+100+"px"
                 }
+            },
+            loadMore() {
+                this.busy = true;
+                setTimeout(() => {
+                    for (var i = 0, j = 10; i < j; i++) {
+                        this.data.push({ name: this.count++ });
+                    }
+                    this.busy = false;
+                }, 1000);
             },
             toastCenter(){
                 this.toast({
@@ -140,12 +153,28 @@
         background: deepskyblue;
     }
     .list{
-        height: 5rem;
+        /*height: 5rem;*/
         overflow: scroll;
     }
     .item {
         border: 1px solid black;
-        height: 1rem;
-        line-height: 1rem;
+    }
+    .wrapper{
+        margin-top: -5px;
+        overflow: scroll;
+        height: 10rem;
+        border: 1px solid black;
+    }
+    .water{
+        column-count: 2;
+        /*display: flex;*/
+        /*flex-direction: row;*/
+        /*flex-wrap:wrap;*/
+        .item{
+            /*flex-basis:50% ;*/
+            /*float: left;*/
+            /*display: inline-block;*/
+            /*width: %;*/
+        }
     }
 </style>
