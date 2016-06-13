@@ -7,25 +7,19 @@
  *
  */
 import {
-    ADD_LIST
+    ADD_LIST,
+    UPDATE_LIST_LOADING
 } from '../mutation-types'
 const state = {
-    data:[
-        "item0",
-        "item1",
-        "item2",
-        "item3",
-        "item4",
-        "item5",
-        "item6",
-        "item7",
-        "item8",
-        "item9"
-    ]
+    data:[],
+    busy:false
 };
 const mutations = {
-    [ADD_LIST](state,msg){
-        state.data.push(msg);
+    [ADD_LIST](state,msgList){
+        state.data=state.data.concat(msgList);
+    },
+    [UPDATE_LIST_LOADING](state,status){
+        state.busy=status
     }
 };
 export default {

@@ -15,3 +15,5 @@ export const TOGGLE_MODAL='TOGGLE_MODAL';
 
 //list
 export const ADD_LIST='ADD_LIST';
+export const UPDATE_LIST_LOADING='UPDATE_LIST_LOADING';
+
